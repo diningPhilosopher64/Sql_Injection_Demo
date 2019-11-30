@@ -1,0 +1,64 @@
+version: "3.3"
+
+services: 
+
+
+  db:
+    # build:
+    image: sourabhkondapaka/tatkal_postgres_db
+
+
+    volumes: 
+      - ./db:/var/lib/postgresql/data
+      
+    networks:
+      - common
+
+    ports: 
+      - 7890:5432
+
+  website:
+    # No need to build everytime unless we make changes to the image
+    # build:
+    #   context: ./dockerFiles  
+    #   dockerfile: smartstocks_django_dockerfile
+    image: sourabhkondapaka/website_sql_injection
+    # restart: on-failure
+
+    
+    networks:
+      - common
+
+    ports: 
+      - 8000:8000
+
+    volumes: 
+      - ./website/:/home/user/
+
+    depends_on: 
+      - db    
+
+    command: >
+     sh -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+
+  # db:
+  #   image: sourabhkondapaka/mysql_db
+
+  #   networks:
+  #     - common
+  
+  #   ports: 
+  #     - 3302:3306
+
+  #   volumes: 
+  #     - ./db:/var/lib/mysql
+
+
+networks:
+  common:
+    driver: bridge
+
+
+
+
+  
